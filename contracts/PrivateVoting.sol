@@ -71,6 +71,8 @@ contract Voting is GatewayCaller {
         } else {
             encryptedVoteChoices[msg.sender] = voteChoice;
         }
+        TFHE.allow(encryptedVoteChoices[msg.sender], address(this));
+        TFHE.allow(encryptedVoteChoices[msg.sender], msg.sender);
 
         // Initialize local variables to avoid issues with uninitialized handles
         euint64 inFavorCountToCast = TFHE.asEuint64(0);
@@ -101,7 +103,6 @@ contract Voting is GatewayCaller {
 
         // Allow the user to view their vote choice and vote count in the future
         TFHE.allow(encryptedVoteCounts[msg.sender], msg.sender);
-        TFHE.allow(encryptedVoteChoices[msg.sender], msg.sender);
     }
 
     /**
