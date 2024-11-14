@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import type { ConfidentialERC20 } from "../../types";
 import { getSigners } from "../signers";
 
-export async function deployConfidentialERC20Fixture(): Promise<ConfidentialERC20> {
+export async function deployConfidentialERC20Fixture (): Promise<ConfidentialERC20> {
   const signers = await getSigners();
 
   const contractFactory = await ethers.getContractFactory("ConfidentialERC20");
