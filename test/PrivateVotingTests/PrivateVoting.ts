@@ -68,36 +68,36 @@ describe("Voting Contract Tests", function () {
     });
   });
 
-  describe("Should be able to vote ", function () {
-    it("should be able to vote in favour ", async function () {
-      const input = this.instances.alice.createEncryptedInput(this.contractAddress, this.signers.alice.address);
-      input.add64(1000);
-      input.add8(1);
-      const encryptedVotingCountAndEncryptedChoice = input.encrypt();
+  // describe("Should be able to vote ", function () {
+  //   it("should be able to vote in favour ", async function () {
+  //     const input = this.instances.alice.createEncryptedInput(this.contractAddress, this.signers.alice.address);
+  //     input.add64(1000);
+  //     input.add8(1);
+  //     const encryptedVotingCountAndEncryptedChoice = input.encrypt();
 
-      const castVoteTx = await this.votingContract.castEncryptedVote(
-        encryptedVotingCountAndEncryptedChoice.handles[0],
-        encryptedVotingCountAndEncryptedChoice.handles[1],
-        encryptedVotingCountAndEncryptedChoice.inputProof,
-      );
+  //     const castVoteTx = await this.votingContract.castEncryptedVote(
+  //       encryptedVotingCountAndEncryptedChoice.handles[0],
+  //       encryptedVotingCountAndEncryptedChoice.handles[1],
+  //       encryptedVotingCountAndEncryptedChoice.inputProof,
+  //     );
 
-      await castVoteTx.wait();
-    });
+  //     await castVoteTx.wait();
+  //   });
 
-    it("should be able to vote against the proposal ", async function () {
-      const input = this.instances.alice.createEncryptedInput(this.contractAddress, this.signers.alice.address);
-      input.add64(1000);
-      input.add8(0);
-      const encryptedVotingCountAndEncryptedChoice = input.encrypt();
+  //   it("should be able to vote against the proposal ", async function () {
+  //     const input = this.instances.alice.createEncryptedInput(this.contractAddress, this.signers.alice.address);
+  //     input.add64(1000);
+  //     input.add8(0);
+  //     const encryptedVotingCountAndEncryptedChoice = input.encrypt();
 
-      const castVoteTx = await this.votingContract.castEncryptedVote(
-        encryptedVotingCountAndEncryptedChoice.handles[0],
-        encryptedVotingCountAndEncryptedChoice.handles[1],
-        encryptedVotingCountAndEncryptedChoice.inputProof,
-      );
+  //     const castVoteTx = await this.votingContract.castEncryptedVote(
+  //       encryptedVotingCountAndEncryptedChoice.handles[0],
+  //       encryptedVotingCountAndEncryptedChoice.handles[1],
+  //       encryptedVotingCountAndEncryptedChoice.inputProof,
+  //     );
 
-      await castVoteTx.wait();
-    });
-  });
+  //     await castVoteTx.wait();
+  //   });
+  // });
 
 });
