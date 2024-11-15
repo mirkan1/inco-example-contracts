@@ -79,7 +79,7 @@ contract BlindAuction is Ownable2Step, GatewayCaller {
         tokenContract = _tokenContract;
         endTime = block.timestamp + biddingTime;
         objectClaimed = TFHE.asEbool(false);
-        TFHE.allow(objectClaimed,address(this));
+        TFHE.allow(objectClaimed, address(this));
         tokenTransferred = false;
         bidCounter = 0;
         stoppable = isStoppable;
