@@ -1,6 +1,4 @@
 import { expect } from "chai";
-
-import { awaitAllDecryptionResults } from "../asyncDecrypt";
 import { createInstances } from "../instance";
 import { getSigners, initSigners } from "../signers";
 import { deployBlindAuctionFixture } from "./BlindAuction.fixture";
@@ -71,7 +69,7 @@ describe("Blind Auction Tests", function () {
 
     // Verify that the auction is stopped
     const isManuallyStopped = await this.auction.manuallyStopped();
-    expect(isManuallyStopped).to.be.true;
+    expect(expect(isManuallyStopped).to.be.true);
   });
 
 })
