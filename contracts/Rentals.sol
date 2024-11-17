@@ -23,13 +23,20 @@ contract Rentals is Ownable {
     uint256 howManyHours;
   }
 
+    struct Bet {
+        uint256 bikeId;
+        address better;
+        euint64 amount;
+        bool settled;
+    }
+
   uint256 public totalSupply = 2**256 - 1;
   uint256 public totalBikes = 0;
   uint256 public totalBikesRented = 0;
   uint256 public availableBikesCounter = 0;
   uint256 public bikeCounter;
   uint256 public hourlyPriceOfBikes = 1 ether;
-
+  address blindAuctionAddress;
   event BikeInfo(uint256 _id, string _result, uint256 _transferred);
   event BikeSigned(uint256 _id, address _owner, uint256 _price);
 
@@ -38,9 +45,15 @@ contract Rentals is Ownable {
   // mapping (uint => Bet) public bets;
   // mapping (address => GamblerInfo) public _GamblerInfo;
 
-  constructor() Ownable(msg.sender) {}
+  constructor(address _address) Ownable(msg.sender) {
+    blindAuctionAddress = _address;
+  }
 
-  function signBike (uint256 _price, string memory _title) public payable {
+  function signBike (
+    uint256 _price,
+    string memory _title
+    /// ConfidentialERC20 _tokenContract
+) public payable {
     uint256 _id = bikeCounter++;
     console.log(_id);
     bikes.push(Bike({
@@ -51,7 +64,7 @@ contract Rentals is Ownable {
       returnTime: 0,
       title: _title,
       howManyRents: 0,
-      renter: 0x0000000000000000000000000000000000000000,
+      renter: address(0x0000000000000000000000000000000000000000),
       howManyHours: 0
     }));
 
@@ -81,9 +94,11 @@ contract Rentals is Ownable {
     bikes[_id].status = 0;
     bikes[_id].returnTime = block.timestamp + (howManyHours * 1 hours);
     bikes[_id].renter = msg.sender;
-    console.log("msg.value", msg.value);
-    console.log("address(this)", address(this));
     payable(address(this)).call{value: msg.value};
+  }
+
+  function bidForBike(einput encryptedValue, bytes calldata inputProof) external {
+    BlindAuction(blindAuctionAddress).bid(encryptedValue, inputProof);
   }
 
   function giveBikeIn(uint256 _id) public payable {

@@ -19,13 +19,13 @@ describe("Blind Auction Tests", function () {
     this.instances = await createInstances(this.signers);
   });
 
-
   it("should allow a user to place a bid and update the highest bid", async function () {
     const bidAmount = 1000;
-
+    console.log("Alice's address: ", this.signers.alice.address);
     // Mint tokens for Alice
     const mintTx = await this.tokenContract.mint(bidAmount);
     await mintTx.wait();
+    console.log("Alice's balance: ", await this.tokenContract.balanceOf(this.signers.alice.address));
 
     // Encrypt the bid amount
     const input = this.instances.alice.createEncryptedInput(this.contractAddress, this.signers.alice.address);
@@ -34,12 +34,14 @@ describe("Blind Auction Tests", function () {
 
     const approveTx = await this.tokenContract['approve(address,bytes32,bytes)'](await this.auction.getAddress(), encryptedBid.handles[0],encryptedBid.inputProof);
     await approveTx.wait();
+    console.log("Alice's balance after approve: ", await this.tokenContract.balanceOf(this.signers.alice.address));
 
     // Alice places a bid
     const bidTx = await this.auction
       .connect(this.signers.alice)
-      .bid(encryptedBid.handles[0], encryptedBid.inputProof,{gasLimit:7000000});
+      .bid(encryptedBid.handles[0], encryptedBid.inputProof, {gasLimit:7000000});
     await bidTx.wait();
+    console.log("Alice's balance after bid: ", await this.tokenContract.balanceOf(this.signers.alice.address));
 
     // Validate that the bid was recorded
     const bidHandle = await this.auction.getBid(this.signers.alice.address);
