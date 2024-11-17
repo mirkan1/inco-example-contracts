@@ -23,10 +23,9 @@ describe("Rantals Tests", function () {
   });
 
   it("should allow a user to set a rental in", async function () {
-    const req = await this.rentalContract.signBike(1000, "my bike");
+    const req = await this.rentalContract.signItem(1000, "my item");
     await req.wait();
-    const bike = this.rentalContract.getBikePrice(0);
-    console.log("bike", bike)
-    expect(bike.owner).to.equal(this.signers.alice.address);
+    const item = this.rentalContract.getItemPrice(0);
+    expect(item.owner).to.equal(this.signers.alice.address);
   })
 });

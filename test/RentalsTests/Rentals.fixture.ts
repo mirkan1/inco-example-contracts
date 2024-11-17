@@ -19,10 +19,9 @@ export async function deployRentalFixture(): Promise<Rentals> {
   await BlindAuctionContract.waitForDeployment();
 
   const RentalsContractFactory = await ethers.getContractFactory("Rentals");
-  console.log("RentalsContractFactory", RentalsContractFactory)
   const RentalsContract = await RentalsContractFactory.connect(signers.alice).deploy(
-    signers.alice.address,
-    // BlindAuctionContract.getAddress().toString,
+    // signers.alice.address,
+    BlindAuctionContract.getAddress().toString,
   );
   await RentalsContract.waitForDeployment();
   return RentalsContract;

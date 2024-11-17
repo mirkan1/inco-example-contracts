@@ -1,0 +1,7 @@
+https://polygon-amoy.gateway.tenderly.co
+Chain ID
+80002 0x13882
+Currency symbol
+POL
+Block explorer URL
+amoy.polygonscan.com
