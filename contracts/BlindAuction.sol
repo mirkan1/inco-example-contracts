@@ -185,8 +185,8 @@ contract BlindAuction is Ownable2Step, GatewayCaller {
 
     /// @notice Get the decrypted winning ticket
     /// @dev Can only be called after the winning ticket has been decrypted -
-    // if `userTickets[account]` is an encryption of decryptedWinningTicket, then `account`
-    // won and can call `claim` succesfully
+        // if `userTickets[account]` is an encryption of decryptedWinningTicket, then `account`
+        // won and can call `claim` succesfully
     /// @return The decrypted winning ticket
     function getDecryptedWinningTicket() external view returns (uint64) {
         require(decryptedWinningTicket != 0, "Winning ticket has not been decrypted yet");
