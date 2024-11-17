@@ -76,7 +76,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "resolutions": {
+    "ajv": "^8.0.0",
+    "ajv-keywords": "^5.0.0"
+  },
   "scripts": {
+    "start": "cd rentals && npm start",
     "preinstall": "node tasks/checkNodeVersion.js",
     "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json && pnpm typechain",
     "compile": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat compile",

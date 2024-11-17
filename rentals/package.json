@@ -20,6 +20,8 @@
     "@walletconnect/client": "^1.7.8",
     "@walletconnect/qrcode-modal": "^1.7.8",
     "@walletconnect/web3-provider": "^1.7.8",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
     "boxicons": "^2.1.1",
     "chained-function": "^0.5.0",
     "classnames": "^2.3.1",
